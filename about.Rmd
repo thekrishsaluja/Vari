@@ -1,10 +1,18 @@
 ---
 title: "About this site"
-description: |
-  Some additional details about the website
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE)
-```
+## About Me
+Hello, my name is Krish and I am a rising junior. I attend Metea Valley and I am an avid blog writer. I enjoy playing many sports like swimming, tennis, basketball, hockey, cricket, and badminton. I also love to play video games like Pokémon Emerald, Super Smash Bros, Minecraft, and Fortnite.
 
+### Contact Information
+
+Email: [krish_saluja@outlook.com](mailto:krish_saluja@outlook.com)
+
+Github: [thekrishsaluja](https://github.com/thekrishsaluja)
+
+## About this project
+
+[Github Project Repository](https://github.com/thekrishsaluja/Variables-that-Accurately-Predict-the-Likelihood-of-a-Stroke)
+
+Learn Data Science for FREE: [Kane's Data Science Bootcamp](https://bootcamp.davidkane.info/)

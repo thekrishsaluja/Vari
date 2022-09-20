@@ -1,0 +1,12 @@
+{
+  "articles": [
+    {
+      "path": "about.html",
+      "title": "About this site",
+      "author": [],
+      "contents": "\r\nAbout Me\r\nHello, my name is Krish and I am a rising junior. I attend Metea\r\nValley and I am an avid blog writer. I enjoy playing many sports like\r\nswimming, tennis, basketball, hockey, cricket, and badminton. I also\r\nlove to play video games like Pokémon Emerald, Super Smash Bros,\r\nMinecraft, and Fortnite.\r\nContact Information\r\nEmail: krish_saluja@outlook.com\r\nGithub: thekrishsaluja\r\nAbout this project\r\nGithub\r\nProject Repository\r\nLearn Data Science for FREE: Kane’s Data Science\r\nBootcamp\r\n\r\n\r\n\r\n",
+      "last_modified": "2022-09-20T17:59:29-05:00"
+    }
+  ],
+  "collections": []
+}
