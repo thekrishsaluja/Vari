@@ -100,3 +100,136 @@ ggplotly(healthplot,tooltip ="text")
 ### Examining the Graph
 Based on the grap shown above, we can see that smoking habit is a pretty accurate indicator of whether or not a person with get a stroke or not. The graph indicates that the former and current smokers across all genders and types of residence are at a high risk for getting a stroke when compared to non-smokers or people with unknown smoking habits. In fact, non smokers seem to have the lowest number of stroke-related cases when compared to the other smoking habits. Residence type is an unreliable variable when it comes to accurately predicting whether or not a person will get a stroke. The number of stroke-related cases average about equal in both types of residence. Gender does not seems to affect the number of stroke-related cases in this scenario.
 Footer
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+---
+title: "Variables-that-Accurately-Predict-the-Onset-of-a-Stroke"
+description: |
+  Welcome to the website. I hope you enjoy it!
+site: distill::distill_website
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+
+# Learn more about creating websites with Distill at:
+# https://rstudio.github.io/distill/website.html
+
+# Learn more about publishing to GitHub Pages at:
+# https://rstudio.github.io/distill/publish_website.html#github-pages
+
+```
+
+## Introduction
+Based on the information provided by the World Health Organization, strokes are the 2nd global leading cause of death, with stroke-related deaths causing the demise of 11% of the people in the world. This has been sourced from a data set which used data from eleven different clinical trials. The mapped data analyzes the effect of multiple different variables such as gender, age, smoking status, etc. on prevalence of strokes. Heart disease and hypertension are the most effective factors that help to accurately predict whether or not a person will suffer from a stroke.
+
+### Key for all Graphs
+The number one(1) denotes that a variable is true, while the number zero(0) denotes that a variable is false.
+
+## Hypertension and Age on the Likelihood of Accurately Predicting a Stroke
+A stroke, in addition to being a neurological disease, is also a cardiovascular disease. As such, one of the possible factors we could examine in order to predict the possible onset of a stroke is whether or not a person has hypertension or not. In addition to examining for hypertension, we can also examine the effect of gender and age on whether or not a person will get a stroke, as it is generally observed that older people, especially males are more likely to suffer from a disease such as a stroke, than an older female.
+
+```{r}
+knitr::opts_chunk$set(echo = FALSE)
+library(tidyverse)
+library(ggthemes)
+library(tidyr)
+library(plotly)
+```
+
+```{r}
+health <- read_csv(file = "healthcare-dataset-stroke-data.csv")
+```
+
+```{r}
+healthplot <- health |> 
+  select(gender,age,hypertension,stroke) |> 
+  drop_na(age) |> 
+  filter(gender!="Other") |> 
+  ggplot((mapping=aes(text = paste("</br>Age:",age, '</br>Hypertension:',hypertension,"</br>Stroke:",stroke), x=age,y=as.factor(hypertension),color=as.factor(stroke))))+
+  geom_jitter()+
+  facet_wrap(~gender)+
+theme_classic()+
+  labs(title="The effect of Heart Disease and Age on Stroke",
+       subtitle="Older females with heart disease are just as equally likely as older females without heart disease to get a stroke!",
+       x="Age",
+       y="Hypertension",
+       color="Stroke",
+       caption="Kaggle: Stroke Prediction Dataset")
+ggplotly(healthplot,tooltip ="text")
+```
+
+
+### Examining the Graph
+Based on the graph shown above, we can see that having hypertension is not a very accurate predictor for whether or not a person will have a stroke or not. The amount of hypertension patients of both genders that suffer from a stroke are actually less than the number of non-hypertension patients that suffer from a stroke. One reason that our results seem to indicate this fact is possibly because there are more non-hypertension patients observed than hypertension patients observed by the study. It could be possible that the stroke is actually more prevalent among hypertension patients, and that the low number of observations of hypertension patients is possibly why the non-hypertension patients in the study seem to have a higher number of stroke related cases. Based on the graph we can also see that females tend to have higher number of strokes than men do. This could be an indication of a possible gender-related variable that causes females to be at a higher likelihood of getting a stroke or this could just have happened by chance in the particular study that we are analyzing.
+
+## Smoking Status and Residence Type on the Likelihood of Accurately Predicting a Stroke
+Smoking is a terrible habit that not only affects the lungs but also affects the whole body. It is more likely that people who smoke will get diseases such as strokes later on in their lives when compared to people who do not smoke. Gender is seemingly an unimportant factor when it comes to accurately predicting whether or not a person will get a stroke in the future. The type of residence seems to be an important variable to analyze as it is possible that rural inhabitants(those with less social contacts) might be at a higher risk for getting a stroke when compared to urban inhabitants, who are more likely to be more socially involved than rural inhabitants.
+
+```{r}
+health |> 
+  select(gender,stroke,smoking_status, Residence_type) |> 
+  drop_na() |> 
+  filter(gender!="Other") |> 
+  ggplot((mapping=aes(x=Residence_type, y=smoking_status, color=stroke)))+
+  geom_jitter()+
+  facet_wrap(~gender)+
+theme_classic()+
+  labs(title="The effect of Residence and Smoking Habits on Stroke",
+       subtitle="Current and former smokers, regardless of gender and type of residence, are more likely to get a stroke than non-smokers and people with an unknown smoking status",
+       x="Type of Residence",
+       y="Smoking Habits",
+       color="Stroke",
+       caption="Kaggle: Stroke Prediction Dataset")
+```
+
+### Examining the Graph
+Based on the graph shown above, we can see that smoking habit is a pretty accurate indicator of whether or not a person with get a stroke or not. The graph indicates that the former and current smokers across all genders and types of residence are at a high risk for getting a stroke when compared to non-smokers or people with unknown smoking habits. In fact, non smokers seem to have the lowest number of stroke-related cases when compared to the other smoking habits. Residence type is an unreliable variable when it comes to accurately predicting whether or not a person will get a stroke. The number of stroke-related cases average about equal in both types of residence. Gender does not seems to affect the number of stroke-related cases in this scenario.
+
+## BMI and Glucose Level on the Likelihood of Accurately Predicting a Stroke
+While BMI may not be the most accurate form of examining the health of the patient, it is one of the most common and widely used techniques in healthcare all across the world. People with higher BMIs tend to be fatter or obese, something that is very well connected to the onset of a stroke. Examining BMI could let us accurately predict whether or not a patient will have a stroke by analyzing their physical health. Glucose levels are a seemingly unimportant factor in predicting the onset of a stroke. Lower glucose levels can be caused by a variety of different factors, which makes them very unreliable in predicting anything beyond the immediate health of a patient. Due to the "present" nature of glucose levels, they would serve to be practically useless when predicting whether or not a patient has a stroke.
+
+```{r}
+healthplot <- health |> 
+  select(gender,bmi,avg_glucose_level,stroke) |> 
+  drop_na() |> 
+  filter(gender!="Other") |> 
+  ggplot((mapping=aes(text = paste("</br>BMI:",bmi, '</br>Glucose Level:',avg_glucose_level,"</br>Stroke:",stroke), x=bmi,y=avg_glucose_level,color=as.factor(stroke))))+
+  geom_jitter()+
+  facet_wrap(~gender)+
+theme_bw()+
+  labs(title="The effect of BMI and Glucose Level on Stroke",
+       subtitle="Older females with heart disease are just as equally likely as older females without heart disease to get a stroke!",
+       x="BMI",
+       y="Glucose Level",
+       color="Stroke")
+ggplotly(healthplot,tooltip ="text")
+```
+
+### Examining the Graph
+Based on the graph shown above, we can see that smoking habit is a pretty accurate indicator of whether or not a person with get a stroke or not. The graph indicates that the former and current smokers across all genders and types of residence are at a high risk for getting a stroke when compared to non-smokers or people with unknown smoking habits. In fact, non smokers seem to have the lowest number of stroke-related cases when compared to the other smoking habits. Residence type is an unreliable variable when it comes to accurately predicting whether or not a person will get a stroke. The number of stroke-related cases average about equal in both types of residence. Gender does not seems to affect the number of stroke-related cases in this scenario.
+
+## Final Answer
+Based on the data that we have collected and analyzed, we can presume that having a high BMI is the most accurate variable to help predict for whether or not someone will get a stroke. BMI or Body Mass Index is calculated using a patient's body weight and height. While BMI is a good predictor for whether or not someone weighs in the healthy zone, it has a flaw where all weight is counted the same, which means that sometimes otherwise healthy patients with highermj density body or lots of muscle get placed in the unhealthy category of weight despite have little body fat. 
